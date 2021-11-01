@@ -1,0 +1,37 @@
+.img {
+  object-fit: cover;
+}
+
+.img-carousel {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.progress-circle {
+  cursor: pointer;
+  margin: auto;
+}
+
+.left-button {
+  position: absolute !important;
+  bottom: 5%;
+  left: 16px;
+}
+
+.right-button {
+  position: absolute !important;
+  bottom: 5%;
+  right: 16px;
+}
+
+.slider-progress {
+  bottom: 5%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 200px;
+}

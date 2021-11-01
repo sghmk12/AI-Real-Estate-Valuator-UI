@@ -1,0 +1,15 @@
+.SearchBarWrapper {
+    position:absolute;
+    z-index: 100;
+    left: calc(50% - 175px);
+    top: 10px;
+    width: 350px;
+}
+
+
+@media (min-width:520px) {
+    .SearchBarWrapper {
+        left: calc(50% - 250px);
+        width: 500px;
+    }
+}
