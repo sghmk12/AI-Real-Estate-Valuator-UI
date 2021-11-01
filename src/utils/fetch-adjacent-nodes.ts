@@ -25,8 +25,7 @@ export const fetchAdjacentNodes = async (long: number, lat: number, homeOptions:
     return response;
 
   } catch (error) {
-    alert("There was an error fetching adjacent nodes :(");// TODO: Create custom error handling component
-    return null;
+    throw(error);
   }
 }
 export default fetchAdjacentNodes

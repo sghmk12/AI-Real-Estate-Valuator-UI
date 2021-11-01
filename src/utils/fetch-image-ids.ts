@@ -3,7 +3,7 @@ import axiosRetry from "axios-retry";
 
 import env from "react-dotenv";
 
-export const fetchImageIds = async (property_id: string): Promise<[string]> => {
+export const fetchimageIDs = async (property_id: string): Promise<[string]> => {
 
   const { API_KEY: apiKey, DEV: devMode, API_HOST: apiHost, LOCAL_HOST: localHost } = env;
 
@@ -13,7 +13,6 @@ export const fetchImageIds = async (property_id: string): Promise<[string]> => {
     retryCondition: (_error) => true, // retry no matter what error
   });
 
-
   try {
     const response: { data: [string] } = await axios.get(`${devMode === "True" ? localHost : apiHost}/api/property_images_ids?key=${apiKey}`, {
       params: {
@@ -22,10 +21,9 @@ export const fetchImageIds = async (property_id: string): Promise<[string]> => {
     });
     return response.data;
   } catch (error) {
-    alert("There was an error fetching image ids :(");// TODO: Create custom error handling component
-    return [''];
+    throw(error);
   }
 
 }
 
-export default fetchImageIds
+export default fetchimageIDs

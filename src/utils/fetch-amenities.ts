@@ -4,12 +4,9 @@ import axiosRetry from "axios-retry";
 import env from "react-dotenv";
 // import { HomeData } from "../../../types";
 
-type AmenitiesResponseType = {
-  data: any,
-  address: string
-}
+interface AmenitiesResponseType {};
 
-export const fetchAmenities = async (data: string): Promise<AmenitiesResponseType> => {
+export const fetchAmenities = async (propertyID: string): Promise<any> => {
 
   const { API_KEY: apiKey, DEV: devMode, API_HOST: apiHost, LOCAL_HOST: localHost } = env;
 
@@ -20,30 +17,20 @@ export const fetchAmenities = async (data: string): Promise<AmenitiesResponseTyp
   });
 
   try {
-    const response: { data: AmenitiesResponseType } = await axios.get(
+    const response = await axios.get(
       `${devMode === "True" ? localHost : apiHost}/api/amenities?key=${apiKey}`,
       {
         params: {
-          id: data,
+          id: propertyID,
         },
       }
     );
+    
+    console.log(response);
 
     return response.data;
   } catch (error) {
-    alert("There was an error fetching amenities data :("); // TODO: Create custom error handling component
-    return {
-      data: {
-        Bathrooms: "",
-        Bedrooms: "",
-        sqarefootage: "",
-        Style: "",
-        Type: "",
-        estimated_price: "",
-        sold_price: "",
-      },
-      address: ''
-    };
+    throw(error); 
   }
 
 }
