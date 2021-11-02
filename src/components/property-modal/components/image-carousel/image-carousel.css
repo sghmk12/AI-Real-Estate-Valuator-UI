@@ -1,5 +1,7 @@
 .img {
   object-fit: cover;
+  height: 250px;
+  width: 100%;
 }
 
 .img-carousel {

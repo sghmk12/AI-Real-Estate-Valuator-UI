@@ -5,16 +5,16 @@ import { PropertyModal } from "../property-modal";
 import "./google-map.css";
 import { MapNode } from "./components";
 import { containerStyle, GoogleMapOptions } from "./static";
-import { fetchImageIds, fetchImage } from "../../utils";
+import { fetchimageIDs, fetchImage } from "../../utils";
 
 interface GoogleMapProps {
   style?: React.CSSProperties;
   center?: google.maps.LatLngLiteral;
   nodes?: any[];
   updateNodeImgs: (
-    propertyId: string,
-    imgIds: string[],
-    images: string[]
+    propertyID: string,
+    imageIDs: string,
+    images: string
   ) => void;
 }
 
@@ -35,42 +35,41 @@ const GoogleMap: React.FC<GoogleMapProps> = (props) => {
   const [currentAddress, setCurrentAddress] = useState<string>("");
   const [primary, setPrimary] = useState<boolean>(false);
   const [currentImages, setCurrentImages] = useState<string[]>([""]);
-  const [loadingImages, setLoadingImages] = useState<boolean>(false);
+  const [currentPropertyID, setCurrentPropertyID] = useState<string>("");
 
   const handleNodeClick = useCallback(
     async (node: MapNodeType) => {
-      const { address, homeOptions, primary, images, propertyId } = node;
+      const { address, homeOptions, primary, images, propertyID } = node;
 
       setIsOpen(true);
 
       setCurrentMarker(homeOptions);
       setCurrentAddress(address);
+      setCurrentPropertyID(propertyID ?? "");
 
       if (primary) {
         setPrimary(true);
       }
 
-      if (images) {
+      if (images.length > 0) {
         setCurrentImages(images);
-      } else if (propertyId) {
-        setLoadingImages(true);
-
-        const ids = await fetchImageIds(propertyId);
-        let images = await Promise.all(ids.map((id) => fetchImage(id)));
-        images = images.map(image => "data:img/jpeg;base64," + image);
-        updateNodeImgs(propertyId, ids, images);
-        setCurrentImages(images);
-
-        setLoadingImages(false);
+      } else if (propertyID) {
+        setCurrentImages([]);
+        const images_info: [string, number][] = await fetchimageIDs(propertyID);
+        Promise.all(
+          images_info.map(([image_id, num_requests]) =>
+            fetchImage({
+              image_id,
+              num_requests,
+              propertyID,
+              updateNodeImgs,
+              setCurrentImages,
+            })
+          )
+        );
       }
     },
-    [
-      setIsOpen,
-      setCurrentMarker,
-      setLoadingImages,
-      updateNodeImgs,
-      setCurrentImages,
-    ]
+    [setIsOpen, setCurrentMarker, updateNodeImgs, setCurrentImages]
   );
 
   const handleClose = useCallback(() => setIsOpen(false), [setIsOpen]);
@@ -90,28 +89,11 @@ const GoogleMap: React.FC<GoogleMapProps> = (props) => {
         onClose={handleClose}
         headerText={currentAddress}
         images={currentImages}
-        loadingImageIds={loadingImages}
-      >
-        {Object.entries(currentMarker).map(([key, value]) =>
-          key === "price" ? (
-            <>
-              <p>
-                <strong>{primary ? "Estimated" : "Sold"} Price: </strong>
-                {`$${Number(currentMarker.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} CAD`}
-              </p>
-              <br />
-            </>
-          ) : (
-            <>
-              <p>
-                <strong>{key}: </strong>
-                {value}
-              </p>
-              <br />
-            </>
-          )
-        )}
-      </PropertyModal>
+        loadingimageIDs={currentImages.length === 0}
+        propertyInfo={currentMarker}
+        primary={primary}
+        propertyID={currentPropertyID}
+      />
       <Map
         mapContainerStyle={style}
         center={center}

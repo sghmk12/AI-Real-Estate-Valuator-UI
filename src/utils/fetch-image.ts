@@ -1,29 +1,37 @@
 import axios from 'axios';
-import axiosRetry from "axios-retry";
 
 import env from "react-dotenv";
 
-export const fetchImage = async (image_id: string): Promise<string> => {
+interface FetchImageArgs {
+  image_id: string,
+  num_requests: number,
+  propertyID: string, 
+  updateNodeImgs: (propertyID: string, imageID: string, image: string) => void, 
+  setCurrentImages: React.Dispatch<React.SetStateAction<string[]>>
+}
 
+
+export const fetchImage = async (args: FetchImageArgs): Promise<string> => {
+  const {image_id, num_requests, propertyID, updateNodeImgs, setCurrentImages} = args;
   const { API_KEY: apiKey, DEV: devMode, API_HOST: apiHost, LOCAL_HOST: localHost } = env;
 
-  axiosRetry(axios, {
-    retries: 10,
-    shouldResetTimeout: true,
-    retryCondition: (_error) => true, // retry no matter what error
-  });
+  const promises = [...Array(Math.ceil(num_requests))].map((_, idx) => axios.get(`${devMode === "True" ? localHost : apiHost}/api/property_images?key=${apiKey}`, {
+    params: {
+      image_id,
+      img_index: idx
+    }
+  }))
+
 
   try {
-    const response: { data: string } = await axios.get(`${devMode === "True" ? localHost : apiHost}/api/property_images?key=${apiKey}`, {
-      params: {
-        image_id,
-      }
-    });
-
-    console.log(response);
-    return response.data;
+    const responses: {data: string}[] = await Promise.all(promises);
+    let image: string = responses.reduce((acc, response) => acc + response.data, '');
+    image = "data:img/jpeg;base64," + image;
+    updateNodeImgs(propertyID, image_id, image);
+    setCurrentImages(prev => [...prev, image]);
+    return image;
   } catch (error) {
-    return '';
+    throw(error);
   }
 
 }

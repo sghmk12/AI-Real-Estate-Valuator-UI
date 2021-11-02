@@ -9,7 +9,7 @@ export const fetchAdjacentNodes = async (long: number, lat: number, homeOptions:
   const { API_KEY: apiKey, DEV: devMode, API_HOST: apiHost, LOCAL_HOST: localHost } = env;
 
   axiosRetry(axios, {
-    retries: 10,
+    retries: 5,
     shouldResetTimeout: true,
     retryCondition: (_error) => true, // retry no matter what error
   });
@@ -25,8 +25,7 @@ export const fetchAdjacentNodes = async (long: number, lat: number, homeOptions:
     return response;
 
   } catch (error) {
-    alert("There was an error fetching adjacent nodes :(");// TODO: Create custom error handling component
-    return null;
+    throw(error);
   }
 }
 export default fetchAdjacentNodes

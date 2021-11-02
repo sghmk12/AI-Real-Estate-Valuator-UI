@@ -14,16 +14,20 @@ import {
   Tab,
   TabPanel
 } from "@chakra-ui/react";
-import { ImgCarousel } from "./components";
+import { ImgCarousel, PropertyInfoPanel, AmenitiesPanel } from "./components";
 import "./property-modal.css";
+import { HomeOptionsType } from "../../types";
+import { fetchAmenities } from '../../utils';
 
 interface PropertyModalProps {
   isOpen: boolean,
   onClose: () => void,
   headerText: React.ReactNode | string,
-  children: React.ReactNode | string,
   images: string[],
-  loadingImageIds: boolean
+  loadingimageIDs: boolean,
+  propertyInfo: HomeOptionsType,
+  primary: boolean,
+  propertyID: string
 }
 
 const PropertyModal: React.FC<PropertyModalProps> = (
@@ -33,9 +37,11 @@ const PropertyModal: React.FC<PropertyModalProps> = (
     isOpen,
     onClose,
     headerText,
-    children,
     images,
-    loadingImageIds
+    loadingimageIDs,
+    propertyInfo,
+    primary,
+    propertyID
   } = props;
 
   const [modal, setModal] = useState<HTMLElement | null>(null);
@@ -56,13 +62,17 @@ const PropertyModal: React.FC<PropertyModalProps> = (
     [setModal]
   );
 
+  const handleAmenitiesTabClick = useCallback(() => {
+    fetchAmenities(propertyID);
+  }, []);
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent ref={modalRef}>
         <ModalCloseButton className="modal-close" />
         <ModalHeader padding={0} style={{display: "flex", flexDirection: "column"}}>
-          {loadingImageIds ? <Spinner size="xl" style={{margin: "50px auto"}}/> : <ImgCarousel images={images} />}
+          {loadingimageIDs ? <Spinner size="xl" style={{margin: "50px auto"}}/> : <ImgCarousel images={images} />}
           <Heading size="lg" style={{ padding: "24px" }}>
             {headerText}
           </Heading>
@@ -71,14 +81,14 @@ const PropertyModal: React.FC<PropertyModalProps> = (
           <Tabs variant="enclosed">
             <TabList>
               <Tab>Property Info</Tab>
-              <Tab>Ameneties</Tab>
+              <Tab onClick={handleAmenitiesTabClick}>Ameneties</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
-                {children}
+                <PropertyInfoPanel propertyInfo={propertyInfo} primary={primary} />
               </TabPanel>
               <TabPanel>
-                <p>Coming Soon!</p>
+                <AmenitiesPanel />
               </TabPanel>
             </TabPanels>
           </Tabs>

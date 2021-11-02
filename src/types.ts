@@ -15,11 +15,11 @@ export interface MapNodeType {
         lat: number,
         lng: number
     },
-    imageIds?: string[],
-    images?: string[]
+    imageIDs: string[],
+    images: string[]
     primary?: boolean,
     homeOptions: HomeOptionsType,
-    propertyId?: string
+    propertyID?: string
 }
 
 export interface AdjacentNodesAPIResponseType {

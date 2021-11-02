@@ -17,14 +17,17 @@ const App: React.FC = () => {
   const [lattitude, setlattitude] = useState<number>(43.642567);
 
   const handleModalOpen = useCallback(() => setModalOpen(true), [setModalOpen]);
+
   const handleModalClose = useCallback(
     () => setModalOpen(false),
     [setModalOpen]
   );
+
   const onSetAddress = useCallback(
     (address: any) => setAddress(address),
     [setAddress]
   );
+
   const onSetCoordinates = useCallback(
     ({ lat, lng }: any) => {
       setLongitude(lng);
@@ -32,14 +35,21 @@ const App: React.FC = () => {
     },
     [setLongitude, setlattitude]
   );
-  const updateNodeImgIds = (propertyId: any, imageIds: string[], images: string[]) => {
-    setNodes((prev) => prev.map(node => {
-      if(node.propertyId === propertyId){
-        return {...node, imageIds, images};
+
+  const updateNodeImgs = useCallback((propertyID: string, imageID: string, image: string) => {
+    
+    setNodes((prev) => prev.map((node) => {
+      const {propertyID: id, imageIDs, images} = node;
+      if(id === propertyID){
+        return {...node, imageIDs: [...imageIDs, imageID], images: [...images, image] };
       }
       return {...node}
     }))
-  };
+  }, [setNodes]);
+
+  const updateNodeAmenities = useCallback((propertyID: string) => {
+  }, [])
+
   const handleResponse = useCallback(
     (res: AdjacentNodesAPIResponseType, req: HomeOptionsType) => {
       setNodes([
@@ -59,8 +69,10 @@ const App: React.FC = () => {
             sold_price
           }) => ({
             location: { lat, lng },
-            propertyId: id,
+            propertyID: id,
             address,
+            images: [],
+            imageIDs: [],
             homeOptions: {
               bathrooms: num_bathrooms,
               bedrooms: num_bedrooms,
@@ -80,7 +92,9 @@ const App: React.FC = () => {
             lng: longitude,
           },
           address,
-          homeOptions: { ...req, price: res.data.predicted_price },
+          images: [],
+          imageIDs: [],
+          homeOptions: { ...req, price: res.data.predicted_price }
         },
       ]);
     },
@@ -114,7 +128,7 @@ const App: React.FC = () => {
       <GoogleMap
         nodes={nodes}
         center={{ lat: lattitude, lng: longitude }}
-        updateNodeImgs={updateNodeImgIds}
+        updateNodeImgs={updateNodeImgs}
       />
     </div>
   );
