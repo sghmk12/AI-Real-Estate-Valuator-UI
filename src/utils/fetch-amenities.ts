@@ -11,7 +11,7 @@ export const fetchAmenities = async (propertyID: string): Promise<any> => {
   const { API_KEY: apiKey, DEV: devMode, API_HOST: apiHost, LOCAL_HOST: localHost } = env;
 
   axiosRetry(axios, {
-    retries: 10,
+    retries: 3,
     shouldResetTimeout: true,
     retryCondition: (_error) => true, // retry no matter what error
   });

@@ -56,6 +56,7 @@ const GoogleMap: React.FC<GoogleMapProps> = (props) => {
       } else if (propertyID) {
         setCurrentImages([]);
         const images_info: [string, number][] = await fetchimageIDs(propertyID);
+        console.log(images_info);
         Promise.all(
           images_info.map(([image_id, num_requests]) =>
             fetchImage({
