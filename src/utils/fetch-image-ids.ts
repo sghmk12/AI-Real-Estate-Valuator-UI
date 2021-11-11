@@ -3,7 +3,7 @@ import axiosRetry from "axios-retry";
 
 import env from "react-dotenv";
 
-export const fetchimageIDs = async (property_id: string): Promise<[string]> => {
+export const fetchimageIDs = async (property_id: string): Promise<[string, number][]> => {
 
   const { API_KEY: apiKey, DEV: devMode, API_HOST: apiHost, LOCAL_HOST: localHost } = env;
 
@@ -14,7 +14,7 @@ export const fetchimageIDs = async (property_id: string): Promise<[string]> => {
   });
 
   try {
-    const response: { data: [string] } = await axios.get(`${devMode === "True" ? localHost : apiHost}/api/property_images_ids?key=${apiKey}`, {
+    const response: { data: [string, number][] } = await axios.get(`${devMode === "True" ? localHost : apiHost}/api/property_images_ids?key=${apiKey}`, {
       params: {
         property_id,
       }

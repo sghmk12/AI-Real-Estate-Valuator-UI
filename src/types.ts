@@ -24,12 +24,6 @@ export interface MapNodeType {
     propertyID?: string
 }
 
-export type IconButtonType = {
-  icon?: Icon;
-  text: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
-}
-
 export interface AdjacentNodesAPIResponseType {
     data: {
         nodes: {
@@ -48,4 +42,10 @@ export interface AdjacentNodesAPIResponseType {
         }[],
         predicted_price: string
     }
+}
+
+export type IconButtonType = {
+  icon?: Icon;
+  text: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }

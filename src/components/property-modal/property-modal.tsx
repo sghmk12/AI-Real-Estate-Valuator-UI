@@ -64,7 +64,7 @@ const PropertyModal: React.FC<PropertyModalProps> = (
 
   const handleAmenitiesTabClick = useCallback(() => {
     fetchAmenities(propertyID);
-  }, []);
+  }, [propertyID]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

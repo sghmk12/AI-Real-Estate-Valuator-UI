@@ -55,11 +55,13 @@ const GoogleMap: React.FC<GoogleMapProps> = (props) => {
         setCurrentImages(images);
       } else if (propertyID) {
         setCurrentImages([]);
-        const ids = await fetchimageIDs(propertyID);
+        const images_info: [string, number][] = await fetchimageIDs(propertyID);
+        console.log(images_info);
         Promise.all(
-          ids.map((image_id) =>
+          images_info.map(([image_id, num_requests]) =>
             fetchImage({
               image_id,
+              num_requests,
               propertyID,
               updateNodeImgs,
               setCurrentImages,
