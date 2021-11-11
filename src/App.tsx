@@ -2,13 +2,13 @@ import React, { useState, useCallback } from "react";
 import "./App.css";
 import env from "react-dotenv";
 import { GoogleMap, SearchForm, GoogleLocationSearch } from "./components";
-import { IconButtonType, HomeOptions } from "./types";
 import {GearFill} from "react-bootstrap-icons"
 
 import {
   HomeOptionsType,
   AdjacentNodesAPIResponseType,
   MapNodeType,
+  IconButtonType
 } from "./types";
 
 const App: React.FC = () => {
