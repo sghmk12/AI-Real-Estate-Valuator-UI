@@ -6,6 +6,7 @@ import {
   HomeOptionsType,
   AdjacentNodesAPIResponseType,
   MapNodeType,
+  AmenitiesAPIResponseType
 } from "./types";
 
 const App: React.FC = () => {
@@ -18,15 +19,13 @@ const App: React.FC = () => {
 
   const handleModalOpen = useCallback(() => setModalOpen(true), [setModalOpen]);
 
-  const handleModalClose = useCallback(
-    () => setModalOpen(false),
-    [setModalOpen]
-  );
+  const handleModalClose = useCallback(() => setModalOpen(false), [
+    setModalOpen,
+  ]);
 
-  const onSetAddress = useCallback(
-    (address: any) => setAddress(address),
-    [setAddress]
-  );
+  const onSetAddress = useCallback((address: any) => setAddress(address), [
+    setAddress,
+  ]);
 
   const onSetCoordinates = useCallback(
     ({ lat, lng }: any) => {
@@ -36,19 +35,39 @@ const App: React.FC = () => {
     [setLongitude, setlattitude]
   );
 
-  const updateNodeImgs = useCallback((propertyID: string, imageID: string, image: string) => {
-    
-    setNodes((prev) => prev.map((node) => {
-      const {propertyID: id, imageIDs, images} = node;
-      if(id === propertyID){
-        return {...node, imageIDs: [...imageIDs, imageID], images: [...images, image] };
-      }
-      return {...node}
-    }))
-  }, [setNodes]);
+  const updateNodeImgs = useCallback(
+    (propertyID: string, imageID: string, image: string) => {
+      setNodes((prev) =>
+        prev.map((node) => {
+          const { propertyID: id, imageIDs, images } = node;
+          if (id === propertyID) {
+            return {
+              ...node,
+              imageIDs: [...imageIDs, imageID],
+              images: [...images, image],
+            };
+          }
+          return { ...node };
+        })
+      );
+    },
+    [setNodes]
+  );
 
-  const updateNodeAmenities = useCallback((propertyID: string) => {
-  }, [])
+  const updateNodeAmenities = useCallback(
+    (propertyID: string, amenities: AmenitiesAPIResponseType) => {
+      setNodes((prev) =>
+        prev.map((node) => {
+          const { propertyID: id } = node;
+          if (id === propertyID) {
+            return { ...node, amenities };
+          }
+          return { ...node };
+        })
+      );
+    },
+    [setNodes]
+  );
 
   const handleResponse = useCallback(
     (res: AdjacentNodesAPIResponseType, req: HomeOptionsType) => {
@@ -66,7 +85,7 @@ const App: React.FC = () => {
             property_type,
             square_footage,
             style,
-            sold_price
+            sold_price,
           }) => ({
             location: { lat, lng },
             propertyID: id,
@@ -81,7 +100,7 @@ const App: React.FC = () => {
               style,
               type: property_type,
               parking: parking_spots,
-              price: sold_price
+              price: sold_price,
             },
           })
         ),
@@ -94,7 +113,7 @@ const App: React.FC = () => {
           address,
           images: [],
           imageIDs: [],
-          homeOptions: { ...req, price: res.data.predicted_price }
+          homeOptions: { ...req, price: res.data.predicted_price },
         },
       ]);
     },
@@ -129,6 +148,7 @@ const App: React.FC = () => {
         nodes={nodes}
         center={{ lat: lattitude, lng: longitude }}
         updateNodeImgs={updateNodeImgs}
+        updateNodeAmenities={updateNodeAmenities}
       />
     </div>
   );

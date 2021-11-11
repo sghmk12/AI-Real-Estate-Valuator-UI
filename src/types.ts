@@ -19,7 +19,8 @@ export interface MapNodeType {
     images: string[]
     primary?: boolean,
     homeOptions: HomeOptionsType,
-    propertyID?: string
+    propertyID?: string,
+    amenities?: AmenitiesAPIResponseType
 }
 
 export interface AdjacentNodesAPIResponseType {
@@ -31,7 +32,7 @@ export interface AdjacentNodesAPIResponseType {
             address: string,
             num_bathrooms: number,
             num_bedrooms: number,
-            num_dens: number, 
+            num_dens: number,
             parking_spots: number,
             property_type: string,
             square_footage: string,
@@ -40,4 +41,14 @@ export interface AdjacentNodesAPIResponseType {
         }[],
         predicted_price: string
     }
+}
+
+export interface AmenitiesAPIResponseType {
+    [key: string]: {
+        address: string;
+        distance: string;
+        latitude: number;
+        longitude: number;
+        name: string;
+    }[]
 }

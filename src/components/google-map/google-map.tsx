@@ -1,6 +1,10 @@
 import React, { useState, useCallback, useMemo } from "react";
 import { GoogleMap as Map } from "@react-google-maps/api";
-import { HomeOptionsType, MapNodeType } from "../../types";
+import {
+  HomeOptionsType,
+  MapNodeType,
+  AmenitiesAPIResponseType,
+} from "../../types";
 import { PropertyModal } from "../property-modal";
 import "./google-map.css";
 import { MapNode } from "./components";
@@ -16,10 +20,14 @@ interface GoogleMapProps {
     imageIDs: string,
     images: string
   ) => void;
+  updateNodeAmenities: (
+    propertyID: string,
+    amenities: AmenitiesAPIResponseType
+  ) => void;
 }
 
 const GoogleMap: React.FC<GoogleMapProps> = (props) => {
-  const { style = containerStyle, center, nodes, updateNodeImgs } = props;
+  const { style = containerStyle, center, nodes, updateNodeImgs, updateNodeAmenities } = props;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentMarker, setCurrentMarker] = useState<HomeOptionsType>({
@@ -36,13 +44,15 @@ const GoogleMap: React.FC<GoogleMapProps> = (props) => {
   const [primary, setPrimary] = useState<boolean>(false);
   const [currentImages, setCurrentImages] = useState<string[]>([""]);
   const [currentPropertyID, setCurrentPropertyID] = useState<string>("");
+  const [currentAmenities, setCurrentAmenities] = useState<AmenitiesAPIResponseType | undefined>();
 
   const handleNodeClick = useCallback(
     async (node: MapNodeType) => {
-      const { address, homeOptions, primary, images, propertyID } = node;
+      const { address, homeOptions, primary, images, propertyID, amenities } = node;
 
       setIsOpen(true);
 
+      setCurrentAmenities(amenities);
       setCurrentMarker(homeOptions);
       setCurrentAddress(address);
       setCurrentPropertyID(propertyID ?? "");
@@ -94,6 +104,8 @@ const GoogleMap: React.FC<GoogleMapProps> = (props) => {
         propertyInfo={currentMarker}
         primary={primary}
         propertyID={currentPropertyID}
+        amenities={currentAmenities}
+        updateAmenities={updateNodeAmenities}
       />
       <Map
         mapContainerStyle={style}

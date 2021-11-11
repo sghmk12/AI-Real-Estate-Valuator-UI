@@ -2,11 +2,12 @@ import axios from 'axios';
 import axiosRetry from "axios-retry";
 
 import env from "react-dotenv";
-// import { HomeData } from "../../../types";
+import { AmenitiesAPIResponseType } from "../types";
 
-interface AmenitiesResponseType {};
-
-export const fetchAmenities = async (propertyID: string): Promise<any> => {
+export const fetchAmenities = async (propertyID: string, updateAmenities: (
+  propertyID: string,
+  amenities: AmenitiesAPIResponseType
+) => void): Promise<any> => {
 
   const { API_KEY: apiKey, DEV: devMode, API_HOST: apiHost, LOCAL_HOST: localHost } = env;
 
@@ -17,7 +18,7 @@ export const fetchAmenities = async (propertyID: string): Promise<any> => {
   });
 
   try {
-    const response = await axios.get(
+    const { data }: { data: AmenitiesAPIResponseType } = await axios.get(
       `${devMode === "True" ? localHost : apiHost}/api/amenities?key=${apiKey}`,
       {
         params: {
@@ -25,12 +26,13 @@ export const fetchAmenities = async (propertyID: string): Promise<any> => {
         },
       }
     );
-    
-    console.log(response);
 
-    return response.data;
+    console.log(data);
+
+    updateAmenities(propertyID, data);
+    return data;
   } catch (error) {
-    throw(error); 
+    throw (error);
   }
 
 }

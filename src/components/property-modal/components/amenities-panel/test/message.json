@@ -1,0 +1,301 @@
+{
+  "Bank": [
+    {
+      "address": "5607 Yonge Street ",
+      "latitude": 43.7800143,
+      "longitude": -79.4152427,
+      "name": "Bank of Nova Scotia"
+    },
+    {
+      "address": "5700 Yonge Street ",
+      "distance": "0.29",
+      "latitude": 43.7810389,
+      "longitude": -79.416547,
+      "name": "RBC Royal Bank"
+    },
+    {
+      "address": "5700 Yonge Street  ",
+      "distance": "0.28",
+      "latitude": 43.7810389,
+      "longitude": -79.416547,
+      "name": "YONGE & FINCH"
+    }
+  ],
+  "Bar": [
+    {
+      "address": "5586 Yonge St ",
+      "distance": "0.14",
+      "latitude": 43.7792994,
+      "longitude": -79.4158575,
+      "name": "Twister Karaoke"
+    },
+    {
+      "address": "5625 Yonge Street ",
+      "distance": "0.16",
+      "latitude": 43.780473,
+      "longitude": -79.415433,
+      "name": "Puck 'N Wings"
+    },
+    {
+      "address": "5307 Yonge St ",
+      "distance": "0.69",
+      "latitude": 43.7731982,
+      "longitude": -79.41356950000001,
+      "name": "St Louis Bar & Grill"
+    }
+  ],
+  "Coffee": [
+    {
+      "address": "5590 Yonge St ",
+      "distance": "0.14",
+      "latitude": 43.779337,
+      "longitude": -79.41585169999999,
+      "name": "Cafe Princess"
+    },
+    {
+      "address": "5650 Yonge St  ",
+      "distance": "0.18",
+      "latitude": 43.7801785,
+      "longitude": -79.41640799999999,
+      "name": "Starbucks"
+    },
+    {
+      "address": "5418 Yonge Street ",
+      "distance": "0.45",
+      "latitude": 43.7752625,
+      "longitude": -79.4148611,
+      "name": "Cafe Le Monde"
+    }
+  ],
+  "Gas Station": [
+    {
+      "address": "4926 Bathur St ",
+      "distance": "2.42",
+      "latitude": 43.7734205,
+      "longitude": -79.4432923,
+      "name": "SHELL - Bathurst Street Toronto"
+    },
+    {
+      "address": "4926 Bathurst Street ",
+      "distance": "2.45",
+      "latitude": 43.7734205,
+      "longitude": -79.4432923,
+      "name": "Shell"
+    },
+    {
+      "address": "1505 Stls Av E ",
+      "distance": "3.71",
+      "latitude": 43.8054293,
+      "longitude": -79.3851833,
+      "name": "Steeles And Laureleaf ESSO"
+    }
+  ],
+  "Groceries": [
+    {
+      "address": "5418 Yonge Street  ",
+      "distance": "0.44",
+      "latitude": 43.7752625,
+      "longitude": -79.4148611,
+      "name": "PureCell Natural Food"
+    },
+    {
+      "address": "20 Church Avenue ",
+      "distance": "0.6",
+      "latitude": 43.7743212,
+      "longitude": -79.412977,
+      "name": "Metro"
+    },
+    {
+      "address": "20 Church Avenue ",
+      "distance": "0.6",
+      "latitude": 43.7743212,
+      "longitude": -79.412977,
+      "name": "Metro (Metro)"
+    }
+  ],
+  "Library": [
+    {
+      "address": "5120 Yonge Street ",
+      "distance": "1.21",
+      "latitude": 43.7681507,
+      "longitude": -79.4143751,
+      "name": "North York Central Library - Toronto Public Library"
+    },
+    {
+      "address": "5120 Yonge Street ",
+      "distance": "1.26",
+      "latitude": 43.7681507,
+      "longitude": -79.4143751,
+      "name": "Toronto Public Library - North York Central Library Pop-Up Branch"
+    },
+    {
+      "address": "5120 Yonge Street ",
+      "distance": "1.26",
+      "latitude": 43.7681507,
+      "longitude": -79.4143751,
+      "name": "Toronto Public Library - North York Central Library"
+    }
+  ],
+  "Liquor Store": [
+    {
+      "address": "20 Church Avenue ",
+      "distance": "0.59",
+      "latitude": 43.7743212,
+      "longitude": -79.412977,
+      "name": "Wine Rack"
+    },
+    {
+      "address": "5997 Yonge Street ",
+      "distance": "1.08",
+      "latitude": 43.7889902,
+      "longitude": -79.41781309999999,
+      "name": "LCBO"
+    },
+    {
+      "address": "5995 Yonge St ",
+      "distance": "1.09",
+      "latitude": 43.7889523,
+      "longitude": -79.41722399999999,
+      "name": "Liquor Control Board Of Ontario"
+    }
+  ],
+  "Mall": [
+    {
+      "address": "5095 Yonge St ",
+      "distance": "1.22",
+      "latitude": 43.7687022,
+      "longitude": -79.4123463,
+      "name": "Riocan Empress Walk Inc"
+    },
+    {
+      "address": "6125 Yonge ",
+      "distance": "1.46",
+      "latitude": 43.79224019999999,
+      "longitude": -79.41807879999999,
+      "name": "Super Khorak"
+    },
+    {
+      "address": "2 Shppard Av E ",
+      "distance": "2",
+      "latitude": 43.7623591,
+      "longitude": -79.4103628,
+      "name": "Sheppard Centre Management Office"
+    }
+  ],
+  "Medical Care": [
+    {
+      "address": "5400 Yonge St ",
+      "distance": "0.52",
+      "latitude": 43.77466,
+      "longitude": -79.4147457,
+      "name": "Toronto Cosmetic Clinic"
+    },
+    {
+      "address": "YongeYonge Street ",
+      "distance": "0.55",
+      "latitude": 43.9120105,
+      "longitude": -79.4467502,
+      "name": "CML HealthCare Inc."
+    },
+    {
+      "address": "77 Finch Avenue West ",
+      "distance": "0.67",
+      "latitude": 43.7780333,
+      "longitude": -79.4222676,
+      "name": "Stem Sciences Inc"
+    }
+  ],
+  "Movie Theatre": [
+    {
+      "address": "5095 Yonge Street ",
+      "distance": "1.2",
+      "latitude": 43.7687022,
+      "longitude": -79.4123463,
+      "name": "Empress Walk"
+    },
+    {
+      "address": "4861 Yonge Street ",
+      "distance": "1.91",
+      "latitude": 43.762123,
+      "longitude": -79.4107262,
+      "name": "Cineplex Odeon Sheppard Cinemas"
+    },
+    {
+      "address": "1 Promenade Circle ",
+      "distance": "4.33",
+      "latitude": 43.8064797,
+      "longitude": -79.4524593,
+      "name": "Imagine Cinemas"
+    }
+  ],
+  "Park": [
+    {
+      "address": "50 Hendon Avenue ",
+      "distance": "0.55",
+      "latitude": 43.7812503,
+      "longitude": -79.4213546,
+      "name": "Hendon Park"
+    },
+    {
+      "address": "250 Beecroft Road ",
+      "distance": "1.08",
+      "latitude": 43.77013059999999,
+      "longitude": -79.4169412,
+      "name": "Dempsey Park"
+    },
+    {
+      "address": "5100 Yonge Street ",
+      "distance": "1.31",
+      "latitude": 43.7673729,
+      "longitude": -79.4141511,
+      "name": "Mel Lastman Square"
+    }
+  ],
+  "Pharmacy": [
+    {
+      "address": "5576 Yonge Street ",
+      "distance": "0.14",
+      "latitude": 43.7790059,
+      "longitude": -79.4158923,
+      "name": "Shoppers Drug Mart"
+    },
+    {
+      "address": "10 Northtown Way ",
+      "distance": "0.39",
+      "latitude": 43.7759301,
+      "longitude": -79.413286,
+      "name": "Northtown Way Pharmacy"
+    },
+    {
+      "address": "5 Park Home Avenue Unit  ",
+      "distance": "1.17",
+      "latitude": 43.7686976,
+      "longitude": -79.4148155,
+      "name": "North York City Centre Pharmacy"
+    }
+  ],
+  "Restaurants": [
+    {
+      "address": "5533 Yonge Street ",
+      "distance": "0.13",
+      "latitude": 43.77855510000001,
+      "longitude": -79.4148799,
+      "name": "Pho Vietnamese Delight"
+    },
+    {
+      "address": "5505 Yonge Street ",
+      "distance": "0.16",
+      "latitude": 43.7780859,
+      "longitude": -79.4148135,
+      "name": "Wild Wing"
+    },
+    {
+      "address": "5582 Yonge Street ",
+      "distance": "0.13",
+      "latitude": 43.7792105,
+      "longitude": -79.4160004,
+      "name": "NeaGoHyang"
+    }
+  ],
+  "weblink": "https://www.zolo.ca/toronto-real-estate/22-olive-avenue"
+}
