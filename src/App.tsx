@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import "./App.css";
 import env from "react-dotenv";
-import { GoogleMap, SearchForm, GoogleLocationSearch } from "./components";
+import { GoogleMap, SearchForm, GoogleLocationSearch, SettingsPage } from "./components";
 import {GearFill} from "react-bootstrap-icons"
 
 import {
@@ -18,6 +18,7 @@ const App: React.FC = () => {
   const [address, setAddress] = useState<string>("");
   const [longitude, setLongitude] = useState<number>(-79.387054);
   const [lattitude, setlattitude] = useState<number>(43.642567);
+  const [showSettings, setShowSettings] = useState<boolean>(false);
 
   const handleModalOpen = useCallback(() => setModalOpen(true), [setModalOpen]);
 
@@ -104,6 +105,14 @@ const App: React.FC = () => {
     [setNodes, lattitude, longitude, address]
   );
 
+  const handleSettingsOpen = useCallback(() => {
+    setShowSettings(true);
+  }, [])
+
+  const handleSettingsClose = useCallback(() => {
+    setShowSettings(false);
+  }, [])
+
   const northEast = new google.maps.LatLng(43.938688, -79.274559);
   const southWest = new google.maps.LatLng(43.55874, -79.697532);
   const TorontoLatLngBounds = new google.maps.LatLngBounds(
@@ -115,7 +124,7 @@ const App: React.FC = () => {
     {
       text: "Settings",
       icon: GearFill,
-      onClick: () => {}
+      onClick: handleSettingsOpen
     }
   ];
 
@@ -136,6 +145,10 @@ const App: React.FC = () => {
         long={longitude}
         lat={lattitude}
         handleResponse={handleResponse}
+      />
+      <SettingsPage
+        handleModalClose={handleSettingsClose}
+        modalOpen={showSettings}
       />
       <GoogleMap
         nodes={nodes}

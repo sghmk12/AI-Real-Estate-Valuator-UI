@@ -49,3 +49,9 @@ export type IconButtonType = {
   text: string;
   onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }
+
+export type Error = {
+    msg?: string;
+    res?: any;
+    data?: any;
+}

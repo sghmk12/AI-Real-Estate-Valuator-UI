@@ -17,7 +17,7 @@ interface FormModalProps {
   headerText: React.ReactNode | string;
   saveText: string;
   cancelText: string;
-  disabled: boolean;
+  disabled?: boolean;
   loading: boolean;
   children: React.ReactNode | string;
 }

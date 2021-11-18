@@ -1,0 +1,15 @@
+{
+    "location": {
+        "label": "Region",
+        "options": [
+            "Toronto"
+        ]
+    },
+    "theme": {
+        "label": "Theme",
+        "options": [
+            "Dark",
+            "Light"
+        ]
+    }
+}
