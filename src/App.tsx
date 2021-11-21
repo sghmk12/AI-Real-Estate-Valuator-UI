@@ -1,7 +1,13 @@
 import React, { useState, useCallback } from "react";
 import "./App.css";
 import env from "react-dotenv";
-import { GoogleMap, SearchForm, GoogleLocationSearch, SettingsPage } from "./components";
+import {
+  GoogleMap,
+  SearchForm,
+  GoogleLocationSearch,
+  SettingsPage,
+  getSettingsLatLngBounds
+} from "./components";
 import {GearFill} from "react-bootstrap-icons"
 
 import {
@@ -13,12 +19,21 @@ import {
 
 const App: React.FC = () => {
   const { GOOGLE_API_KEY: googleApiKey } = env;
+
+  const northEast = new google.maps.LatLng(43.938688, -79.274559);
+  const southWest = new google.maps.LatLng(43.55874, -79.697532);
+  const defaultLatLngBounds = new google.maps.LatLngBounds(
+    southWest,
+    northEast
+  );
+
   const [nodes, setNodes] = useState<MapNodeType[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [address, setAddress] = useState<string>("");
   const [longitude, setLongitude] = useState<number>(-79.387054);
   const [lattitude, setlattitude] = useState<number>(43.642567);
   const [showSettings, setShowSettings] = useState<boolean>(false);
+  const [latLngBounds, setLatLngBounds] = useState<google.maps.LatLngBounds>(defaultLatLngBounds)
 
   const handleModalOpen = useCallback(() => setModalOpen(true), [setModalOpen]);
 
@@ -113,12 +128,9 @@ const App: React.FC = () => {
     setShowSettings(false);
   }, [])
 
-  const northEast = new google.maps.LatLng(43.938688, -79.274559);
-  const southWest = new google.maps.LatLng(43.55874, -79.697532);
-  const TorontoLatLngBounds = new google.maps.LatLngBounds(
-    southWest,
-    northEast
-  );
+  const onSetSettings = useCallback((settings) => {
+    if(settings instanceof Object && settings["location"]) setLatLngBounds(getSettingsLatLngBounds(settings["location"]))
+  }, [])
 
   const buttons : Array<IconButtonType> = [
     {
@@ -132,7 +144,7 @@ const App: React.FC = () => {
     <div className="App">
       <GoogleLocationSearch
         apiKey={googleApiKey}
-        bounds={TorontoLatLngBounds}
+        bounds={latLngBounds}
         handleModalOpen={handleModalOpen}
         address={address}
         onSetAddress={onSetAddress}
@@ -148,6 +160,7 @@ const App: React.FC = () => {
       />
       <SettingsPage
         handleModalClose={handleSettingsClose}
+        onSetSettings={onSetSettings}
         modalOpen={showSettings}
       />
       <GoogleMap

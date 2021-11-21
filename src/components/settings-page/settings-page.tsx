@@ -5,17 +5,18 @@ import { FormModal } from "../form-modal";
 import { ErrorAlert } from "../alerts";
 import { Error } from "../../types";
 import { options } from "./static";
-import defaultSettings from "./static/defaultSettings.json"
+import defaultSettings from "./static/default-settings.json"
 
 const STORAGE_KEY = "APP_SETTINGS"
 
 interface SettingsProps {
     modalOpen: boolean;
     handleModalClose: () => void;
+    onSetSettings?: (settings: any) => void;
 }
 
 const SettingsPage: React.FC<SettingsProps> = (props) => {
-    const { modalOpen, handleModalClose } = props;
+    const { modalOpen, handleModalClose, onSetSettings } = props;
     const [loading, setLoading] = useState<boolean>(false);
     const [settings, setSettings] = useState<any>(defaultSettings);
     const [error, setError] = useState<Error>();
@@ -23,7 +24,11 @@ const SettingsPage: React.FC<SettingsProps> = (props) => {
     useEffect(() =>{
         try{
             const data = localStorage.getItem(STORAGE_KEY);
-            if(data) setSettings(JSON.parse(data));
+            if(data){
+                const parsedData = JSON.parse(data); 
+                setSettings(parsedData);
+                if(onSetSettings) onSetSettings(parsedData)
+            }
         }catch(e){
             setError({msg: "Error retreiving previous settings"});
         }
@@ -39,6 +44,7 @@ const SettingsPage: React.FC<SettingsProps> = (props) => {
                 setError({msg:"Sorry, we could not save your settings"});
             }
             setLoading(false);
+            handleModalClose();
         },
         []
     );
@@ -74,7 +80,7 @@ const SettingsPage: React.FC<SettingsProps> = (props) => {
             {options.map(({ id, label, options }) => (
             <FormControl marginTop={4} id={id} isRequired>
                 <FormLabel>{label}</FormLabel>
-                <Select value={settings[id]} onChange={updateSettings} placeholder="Select">
+                <Select value={settings[id]} onChange={updateSettings}>
                 {options}
                 </Select>
             </FormControl>
