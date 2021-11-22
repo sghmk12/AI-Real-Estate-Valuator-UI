@@ -5,7 +5,7 @@ import PlacesAutoComplete, {
   geocodeByAddress,
 } from "react-places-autocomplete";
 import GoogleLogo from "./assets/powered_by_google_on_white.png";
-import { GeoAltFill } from "react-bootstrap-icons";
+import { GeoAltFill, GearFill} from "react-bootstrap-icons";
 
 import "./google-location-search.css";
 import {
@@ -19,6 +19,8 @@ import {
   Divider
 } from "@chakra-ui/react";
 
+import {IconButtonType} from "../../types"
+
 interface GoogleLocationSearchProps {
   apiKey: string;
   bounds?: google.maps.LatLngBounds,
@@ -26,6 +28,7 @@ interface GoogleLocationSearchProps {
   address: string;
   onSetCoordinates: Function;
   handleModalOpen: () => void;
+  buttons?: Array<IconButtonType>;
 }
 
 const inBounds = (point: google.maps.LatLngLiteral, bounds: google.maps.LatLngBounds) => {
@@ -54,6 +57,7 @@ const GoogleLocationSearch: React.FC<GoogleLocationSearchProps> = (props) => {
     onSetCoordinates,
     handleModalOpen,
     address,
+    buttons
   } = props;
 
   const [loadingAutoLocate, setLoadingAutoLocate] = useState<boolean>(false);
@@ -175,6 +179,22 @@ const GoogleLocationSearch: React.FC<GoogleLocationSearchProps> = (props) => {
             >
               Select
             </Button>
+            {buttons !== undefined && buttons.map((btn: IconButtonType) => (
+              btn.icon ? (
+                <IconButton
+                  aria-label={btn.text}
+                  colorScheme="teal"
+                  onClick={btn.onClick}
+                  >
+                    <Icon as={btn.icon}/>
+                  </IconButton>
+              ) : (
+                <Button
+                  onClick={btn.onClick}
+                  colourScheme="teal"
+                  >{btn.text}</Button>
+              )
+            ))}
           </Stack>
           <List
             spacing={3}

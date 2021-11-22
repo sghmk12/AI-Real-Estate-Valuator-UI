@@ -1,3 +1,5 @@
+import {Icon} from "react-bootstrap-icons"
+
 export interface HomeOptionsType {
     bathrooms: number,
     bedrooms: number,
@@ -40,4 +42,16 @@ export interface AdjacentNodesAPIResponseType {
         }[],
         predicted_price: string
     }
+}
+
+export type IconButtonType = {
+  icon?: Icon;
+  text: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+}
+
+export type Error = {
+    msg?: string;
+    res?: any;
+    data?: any;
 }
