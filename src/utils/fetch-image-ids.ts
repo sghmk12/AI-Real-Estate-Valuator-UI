@@ -1,11 +1,9 @@
 import axios from 'axios';
 import axiosRetry from "axios-retry";
 
-import env from "react-dotenv";
-
 export const fetchimageIDs = async (property_id: string): Promise<[string, number][]> => {
 
-  const { API_KEY: apiKey, DEV: devMode, API_HOST: apiHost, LOCAL_HOST: localHost } = env;
+  const {  REACT_APP_API_KEY: apiKey,  REACT_APP_DEV: devMode,  REACT_APP_API_HOST: apiHost,  REACT_APP_LOCAL_HOST: localHost } = process.env;
 
   axiosRetry(axios, {
     retries: 10,

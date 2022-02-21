@@ -24,16 +24,16 @@
     "react": "^17.0.2",
     "react-bootstrap-icons": "^1.4.0",
     "react-dom": "^17.0.2",
-    "react-dotenv": "^0.1.3",
     "react-places-autocomplete": "^7.3.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.0",
     "react-transition-group": "^4.4.2",
     "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "yarn": "^1.22.17"
   },
   "scripts": {
-    "start": "react-dotenv && react-scripts start",
-    "build": "react-dotenv && react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -53,15 +53,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "react-dotenv": {
-    "whitelist": [
-      "GOOGLE_API_KEY",
-      "API_KEY",
-      "DEV",
-      "LOCAL_HOST",
-      "API_HOST"
     ]
   },
   "devDependencies": {

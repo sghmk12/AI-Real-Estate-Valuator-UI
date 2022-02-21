@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import env from "react-dotenv";
-
 interface FetchImageArgs {
   image_id: string,
   num_requests: number,
@@ -13,7 +11,7 @@ interface FetchImageArgs {
 
 export const fetchImage = async (args: FetchImageArgs): Promise<string> => {
   const {image_id, num_requests, propertyID, updateNodeImgs, setCurrentImages} = args;
-  const { API_KEY: apiKey, DEV: devMode, API_HOST: apiHost, LOCAL_HOST: localHost } = env;
+  const {  REACT_APP_API_KEY: apiKey,  REACT_APP_DEV: devMode,  REACT_APP_API_HOST: apiHost,  REACT_APP_LOCAL_HOST: localHost } = process.env;
 
   const promises = [...Array(Math.ceil(num_requests))].map((_, idx) => axios.get(`${devMode === "True" ? localHost : apiHost}/api/property_images?key=${apiKey}`, {
     params: {

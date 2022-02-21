@@ -3,14 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { config } from "dotenv";
 import { LoadScript } from "@react-google-maps/api";
 import { ChakraProvider } from "@chakra-ui/react";
-import env from "react-dotenv";
 
-config();
-
-const apiKey = env.GOOGLE_API_KEY;
+const apiKey: string = process.env.REACT_APP_GOOGLE_API_KEY ?? "";
 
 ReactDOM.render(
   <React.StrictMode>

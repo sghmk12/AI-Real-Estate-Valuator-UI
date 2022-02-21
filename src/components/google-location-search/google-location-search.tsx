@@ -191,7 +191,7 @@ const GoogleLocationSearch: React.FC<GoogleLocationSearchProps> = (props) => {
               ) : (
                 <Button
                   onClick={btn.onClick}
-                  colourScheme="teal"
+                  colorScheme="teal"
                   >{btn.text}</Button>
               )
             ))}

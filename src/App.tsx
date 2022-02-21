@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from "react";
 import "./App.css";
-import env from "react-dotenv";
 import {
   GoogleMap,
   SearchForm,
@@ -18,7 +17,7 @@ import {
 } from "./types";
 
 const App: React.FC = () => {
-  const { GOOGLE_API_KEY: googleApiKey } = env;
+  const { REACT_APP_GOOGLE_API_KEY: googleApiKey = "" } = process.env;
 
   const northEast = new google.maps.LatLng(43.938688, -79.274559);
   const southWest = new google.maps.LatLng(43.55874, -79.697532);
